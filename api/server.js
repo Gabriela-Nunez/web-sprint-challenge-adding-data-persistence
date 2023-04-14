@@ -11,16 +11,12 @@ server.use('/api/resources', resourceRouter)
 server.use('/api/projects', projectRouter)
 server.use('/api/task', taskRouter)
 
-server.use('*', (req, res, next) => {
-  next({ status: 404, message: 'not found'})
-})
-
-server.use((err, req, res, next) => { //eslint-disable-line
-  res.status(500).json({
-    message: 'Sorry, something went wrong in the router.',
-    err: err.message,
-    stack: err.stack,
+server.use('*', (req, res) => {
+  res.status(404).json({
+    message: 'Sorry, not found'
   })
 })
+
+
 
 module.exports = server;
